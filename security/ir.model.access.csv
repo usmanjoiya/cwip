@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fix_a_fix_a,fix_a.fix_a,model_fix_a_fix_a,,1,0,0,0

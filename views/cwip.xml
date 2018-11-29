@@ -1,0 +1,139 @@
+<flectra>
+    <data>
+
+        <record model="ir.ui.view" id="cwip_tree_view_tree">
+            <field name="name">cwip.tree</field>
+            <field name="model">cwip.asset.category_custom</field>
+            <field name="arch" type="xml">
+                <tree string="Tree">
+                    <field name="name"/>
+                    <field name="account_cwip_id"/>
+                    <field name="journal_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cwip_form_view">
+            <field name="name">cwip.form</field>
+            <field name="model">cwip.asset.category_custom</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <div class="oe_title">
+                            <label for="name" string="CWIP Asset Category" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Computers"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group string="Journal Entries">
+                            <div>
+                                <label for="journal_id" style="font-weight: bold;" string="Journal"/>
+                            </div>
+                            <field name="journal_id" nolabel="1"/>
+                            <div>
+                                <label for="account_cwip_id" style="font-weight: bold;"/>
+                            </div>
+                            <field name="account_cwip_id" nolabel="1"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="cwip_list_action_custom">
+            <field name="name">CWIP Category</field>
+            <field name="res_model">cwip.asset.category_custom</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="FA_list_form_inherit_asset_categories">
+            <field name="name">cwip.form_</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//sheet/nootbook/page/field/tree/field[@name='name']" position="inside">-->
+                <xpath expr="//notebook[1]/page[1]/field[@name='invoice_line_ids']/tree/field[@name='name']"
+                       position="after">
+                    <field name="cwip_asset__id" />
+                    <!--account_cwip_id-->
+                </xpath>
+
+                <xpath expr="//notebook[1]/page[1]/field[@name='invoice_line_ids']/tree/field[@name='account_id']"
+                       position="replace">
+                    <field name="account_cwip_id" groups="account.group_account_user"/>
+                </xpath>
+                    <!--<field name="list_cwip_asset"/>-->
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="cwip_assets_form_view_tree">
+            <field name="name">cwip.asset.tree</field>
+            <field name="model">cwip.assets</field>
+            <field name="arch" type="xml">
+                <tree string="Tree">
+                    <field name="name"/>
+                    <field name="cwip_category_id"/>
+                    <!--<field name="journal_id"/>-->
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="cwip_assets_form_view_form">
+            <field name="name">cwip.asses.form</field>
+            <field name="model">cwip.assets</field>
+            <field name="arch" type="xml">
+                <form string="Form">
+                    <sheet>
+                        <group>
+
+                            <group>
+                                <field name="name"/>
+                            </group>
+
+                            <group>
+                                <field name="cwip_category_id"/>
+                            </group>
+
+                            <!--<field name="list_cwip_asset"  readonly="1" create = "false">-->
+                            <!--<tree>-->
+                            <!--<field name="partner_id"/>-->
+                            <!--<field name="product_id"/>-->
+                            <!--<field name="name"/>-->
+                            <!--<field name="create_date"/>-->
+                            <!--<field name="quantity"/>-->
+                            <!--<field name="price_unit"/>-->
+                            <!--<field name="invoice_line_tax_ids"/>-->
+                            <!--<field name="price_subtotal"/>-->
+
+                            <!--</tree>-->
+                            <!--</field>-->
+                            <!--<field name="list_cwip_asset1" readonly="1" create = "false"/>-->
+
+
+                            <!--widget = "many2many_checkboxes"-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="cwip_assets_list_action_custom">
+            <field name="name">CWIP Assets</field>
+            <field name="res_model">cwip.assets</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem parent="account.account_management_menu" name="CWIP Category"
+                  id="menu_action_account_asset_asset_list_cwip" action="cwip_list_action_custom" sequence="6"/>
+        <menuitem parent="account.account_management_menu" name="CWIP Asset"
+                  id="menu_action_account_asset_list_cwip_assets" action="cwip_assets_list_action_custom" sequence="6"/>
+
+    </data>
+</flectra>

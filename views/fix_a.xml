@@ -1,0 +1,70 @@
+<flectra>
+    <data>
+         <record id="FA_list_form_inherit_asset_categories" model="ir.ui.view">
+            <field name="name">account.asset.category.abc</field>
+            <field name="model">account.asset.category</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>
+            <field name="arch" type="xml">
+
+                <!--<xpath expr="//field [@name='journal_id']" position="after">-->
+                <xpath expr="//field [@name='account_depreciation_expense_id']" position="after">
+                    <!--<xpath expr="//div[contains(@class,'oe_title')]" position="after">-->
+                    <!--//div[contains(@class, 'measure-tab') and contains(.//span, 'someText')]-->
+                <!--<xpath expr="notebook" position="before">-->
+
+                        <field  name="list"/>
+                </xpath>
+
+                <xpath expr="//field [@name='account_depreciation_id']" position="attributes">
+                    <attribute name='attrs'>{'invisible':[('list', '=', '_cwip')]}</attribute>
+                    <!--<attribute name='attrs'>{'required':[('list', '=', '_cwip')]}</attribute>-->
+                     <attribute name="required">False</attribute>
+                </xpath>
+
+
+                <xpath expr="//label [@for='account_depreciation_id']" position="attributes">
+                    <attribute name='attrs'>{'invisible':[('list', '=', '_cwip')]}</attribute>
+                </xpath>
+
+
+                 <xpath expr="//field [@name='account_depreciation_expense_id']" position="attributes">
+                     <attribute name='attrs'>{'invisible':[('list', '=', '_cwip')]}</attribute>
+                     <attribute name="required">False</attribute>
+                </xpath>
+
+
+                <xpath expr="//label [@for='account_depreciation_expense_id']" position="attributes">
+                    <attribute name='attrs'>{'invisible':[('list', '=', '_cwip')]}</attribute>
+                </xpath>
+
+                <xpath expr="//notebook" position="attributes">
+
+                    <xpath exper = "//field [@name='method_number']" position = "attributes">
+                        <attribute name="required" required="False"></attribute>
+                    </xpath>
+
+                    <xpath exper = "//field [@name='method_period']" position = "attributes">
+                        <attribute name="required" required="False"></attribute>
+                    </xpath>
+
+
+                    <xpath expr="//label [@for='method_period']" position="attributes">
+                        <attribute name="required" required="False"></attribute>
+                    </xpath>
+
+
+                    <xpath exper = "//field [@name='prorata']" position = "attributes">
+                        <attribute name="required" required="False"></attribute>
+                    </xpath>
+                        <!--<attribute name="required">{'False':[('list', '=', '_cwip')]}</attribute>-->
+                    <attribute name='attrs'>{'invisible':[('list', '=', '_cwip')]}</attribute>
+
+                </xpath>
+            </field>
+        </record>
+                    <!--&lt;!&ndash;account_asset.account_asset_category_fixedassets0&ndash;&gt;-->
+
+    </data>
+</flectra>
+
+
